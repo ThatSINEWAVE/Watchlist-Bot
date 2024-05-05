@@ -25,8 +25,8 @@ To use the Watchlist Bot, follow these steps:
 3. Create a `.env` file in the root directory of the repository.
 4. Set the following environment variables in the `.env` file:
    - `TOKEN`: Your Discord bot token.
-   - `MONITOR_CHANNEL_ID`: The Discord channel ID where invite links will be monitored.
-   - `FORUM_CHANNEL_ID`: The Discord channel ID where server invite information will be posted.
+   - `INVITES_CHANNEL_ID`: The Discord channel ID where invite links will be monitored.
+   - `INVITES_FORUM_CHANNEL_ID`: The Discord channel ID where server invite information will be posted.
    - `URL_CHANNEL_ID`: The Discord channel ID where URLs will be monitored.
    - `URL_FORUM_CHANNEL_ID`: The Discord channel ID where URL information will be posted.
 5. Run the bot using `python main.py`.
