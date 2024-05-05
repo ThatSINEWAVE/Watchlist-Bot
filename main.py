@@ -14,8 +14,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
-MONITOR_CHANNEL_ID = os.getenv("MONITOR_CHANNEL_ID")
-FORUM_CHANNEL_ID = os.getenv("FORUM_CHANNEL_ID")
+INVITES_CHANNEL_ID = os.getenv("INVITES_CHANNEL_ID")
+INVITES_FORUM_CHANNEL_ID = os.getenv("INVITES_FORUM_CHANNEL_ID")
 URL_CHANNEL_ID = os.getenv("URL_CHANNEL_ID")
 URL_FORUM_CHANNEL_ID = os.getenv("URL_FORUM_CHANNEL_ID")
 
@@ -37,7 +37,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id == int(MONITOR_CHANNEL_ID):
+    if message.channel.id == int(INVITES_CHANNEL_ID):
         await process_invites(message)
     elif message.channel.id == int(URL_CHANNEL_ID):
         await process_urls(message)
@@ -129,7 +129,7 @@ def get_invite_info(invite_code):
 
 
 async def check_existing_post(guild_id):
-    forum_channel = client.get_channel(int(FORUM_CHANNEL_ID))
+    forum_channel = client.get_channel(int(INVITES_FORUM_CHANNEL_ID))
     if forum_channel:
         for thread in forum_channel.threads:
             thread_message = await thread.fetch_message(thread.id)
@@ -139,7 +139,7 @@ async def check_existing_post(guild_id):
 
 
 async def create_invite_post(message, invite_info, invite_link):
-    forum_channel = client.get_channel(int(FORUM_CHANNEL_ID))
+    forum_channel = client.get_channel(int(INVITES_FORUM_CHANNEL_ID))
     if forum_channel:
         random_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
         title = f'[SERVER-{random_code}] - {message.created_at.strftime("%m/%d/%Y")}'
