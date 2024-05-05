@@ -2,7 +2,6 @@
 
 # Watchlist Bot
 
-## Overview
 Watchlist Bot is a Discord bot designed to monitor specified channels for new invite links and URLs, providing detailed information about them.
 
 </div>
