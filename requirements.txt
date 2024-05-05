@@ -1,0 +1,4 @@
+discord==2.3.2
+python-whois==0.7.3
+requests==2.26.0
+python-dotenv==1.0.1
