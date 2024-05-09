@@ -2,7 +2,7 @@
 
 # Watchlist Bot
 
-Watchlist Bot is a Discord bot designed to monitor specified channels for new invite links and URLs, providing detailed information about them.
+Watchlist Bot is a Discord bot designed to monitor specified channels for new invite links, URLs, and user IDs, providing detailed information about them.
 
 </div>
 
@@ -10,7 +10,8 @@ Watchlist Bot is a Discord bot designed to monitor specified channels for new in
 - Monitors designated channels for invite links and URLs.
 - Extracts and processes invite links to provide detailed server information.
 - Extracts and processes URLs to provide detailed domain and IP information.
-
+- Extracts and processes user IDs to provide detailed user information.
+- 
 <div align="center">
 
 ## ☕ [Support my work on Ko-Fi](https://ko-fi.com/thatsinewave)
@@ -29,6 +30,8 @@ To use the Watchlist Bot, follow these steps:
    - `INVITES_FORUM_CHANNEL_ID`: The Discord channel ID where server invite information will be posted.
    - `URL_CHANNEL_ID`: The Discord channel ID where URLs will be monitored.
    - `URL_FORUM_CHANNEL_ID`: The Discord channel ID where URL information will be posted.
+   - `USER_ID_CHANNEL_ID`: The Discord channel ID where user IDs will be monitored.
+   - `USER_FORUM_CHANNEL_ID`: The Discord channel ID where user information will be posted.
 5. Run the bot using `python main.py`.
 
 ## Dependencies
@@ -45,7 +48,7 @@ To use the Watchlist Bot, follow these steps:
 </div>
 
 ## Usage
-Once the bot is running and configured correctly, it will automatically monitor the specified channels for invite links and URLs. When a new invite link or URL is detected, it will fetch detailed information and post it in the designated forum channels.
+Once the bot is running and configured correctly, it will automatically monitor the specified channels for invite links, URLs, and user IDs. When a new invite link, URL, or user ID is detected, it will fetch detailed information and post it in the designated forum channels.
 
 ## Contributing
 Contributions are welcome! If you encounter any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
