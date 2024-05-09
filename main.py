@@ -34,7 +34,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Discord's API"))
-    print(f'Bot is ready! Monitoring channels for invites and URLs.')
+    print(f'[WATCHLIST] Bot is ready! Monitoring channels for invites, user IDs and URLs.')
 
 
 @client.event
@@ -58,20 +58,20 @@ def extract_user_ids(content):
 
 
 async def process_user_ids(message):
-    print(f'Message received in user ID channel: {message.content}')
+    print(f'[WATCHLIST] Message received in user ID channel: {message.content}')
     user_ids = extract_user_ids(message.content)
     for user_id in user_ids:
-        print(f'Extracted user ID: {user_id}')
+        print(f'[WATCHLIST] Extracted user ID: {user_id}')
         user_info = get_user_info(user_id)
         if user_info:
-            print(f'User information retrieved for user: {user_id}')
+            print(f'[WATCHLIST] User information retrieved for user: {user_id}')
             existing_post = await check_existing_user_post(user_id)
             if not existing_post:
                 await create_user_post(message, user_info, user_id)
             else:
                 await message.channel.send(f'A post for this user already exists: {existing_post.jump_url}')
         else:
-            print(f'Failed to retrieve user information for user ID: {user_id}')
+            print(f'[WATCHLIST] Failed to retrieve user information for user ID: {user_id}')
 
 
 def get_user_info(user_id):
@@ -103,7 +103,7 @@ async def create_user_post(message, user_info, user_id):
         thread = await forum_channel.create_thread(name=title, content=message_content, auto_archive_duration=60)
         return thread
     else:
-        print('Failed to find the user forum channel.')
+        print('[WATCHLIST] Failed to find the user forum channel.')
         return None
 
 
@@ -215,25 +215,25 @@ def get_premium_type_name(premium_type):
 
 
 async def process_invites(message):
-    print(f'Message received in invite channel: {message.content}')
+    print(f'[WATCHLIST] Message received in invite channel: {message.content}')
     invite_links = extract_invite_links(message.content)
     for link in invite_links:
         invite_code = extract_invite_code(link)
         if invite_code:
-            print(f'Extracted invite code: {invite_code}')
+            print(f'[WATCHLIST] Extracted invite code: {invite_code}')
             invite_info = get_invite_info(invite_code)
             if invite_info:
                 guild_id = invite_info['guild']['id']
-                print(f'Invite information retrieved for server: {guild_id}')
+                print(f'[WATCHLIST] Invite information retrieved for server: {guild_id}')
                 existing_post = await check_existing_post(guild_id)
                 if not existing_post:
                     await create_invite_post(message, invite_info, link)
                 else:
                     await message.channel.send(f'A post for this server already exists: {existing_post.jump_url}')
             else:
-                print(f'Failed to retrieve invite information for invite code: {invite_code}')
+                print(f'[WATCHLIST] Failed to retrieve invite information for invite code: {invite_code}')
         else:
-            print(f'Invalid invite link: {link}')
+            print(f'[WATCHLIST] Invalid invite link: {link}')
 
 
 async def check_existing_url_post(url):
@@ -247,7 +247,7 @@ async def check_existing_url_post(url):
 
 
 async def process_urls(message):
-    print(f'Message received in URL channel: {message.content}')
+    print(f'[WATCHLIST] Message received in URL channel: {message.content}')
     urls = extract_urls(message.content)
     for url in urls:
         url_info = get_url_info(url)
@@ -258,7 +258,7 @@ async def process_urls(message):
             else:
                 await message.channel.send(f'A post for this URL already exists: {existing_post.jump_url}')
         else:
-            print(f'Failed to retrieve information for URL: {url}')
+            print(f'[WATCHLIST] Failed to retrieve information for URL: {url}')
 
 
 def extract_invite_links(content):
@@ -318,7 +318,7 @@ async def create_invite_post(message, invite_info, invite_link):
         thread = await forum_channel.create_thread(name=title, content=message_content, auto_archive_duration=60)
         return thread
     else:
-        print('Failed to find the forum channel.')
+        print('[WATCHLIST] Failed to find the forum channel.')
         return None
 
 
@@ -385,7 +385,7 @@ def get_url_info(url):
             ip_info = get_ip_info(ip_address)
             return {'whois': response, 'ip_info': ip_info}
     except Exception as e:
-        print(f'Error fetching URL info: {e}')
+        print(f'[WATCHLIST] Error fetching URL info: {e}')
     return None
 
 
@@ -398,7 +398,7 @@ def get_ip_info(ip_address):
         if response.status_code == 200:
             return response.json()
     except Exception as e:
-        print(f'Error fetching IP info: {e}')
+        print(f'[WATCHLIST] Error fetching IP info: {e}')
     return None
 
 
@@ -411,7 +411,7 @@ async def create_url_post(message, url, url_info):
         thread = await forum_channel.create_thread(name=title, content=message_content, auto_archive_duration=60)
         return thread
     else:
-        print('Failed to find the URL forum channel.')
+        print('[WATCHLIST] Failed to find the URL forum channel.')
         return None
 
 
