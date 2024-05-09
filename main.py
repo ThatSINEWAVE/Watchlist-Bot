@@ -39,11 +39,18 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id == int(INVITES_CHANNEL_ID):
+    if message.channel is None:
+        return
+
+    invites_channel_id = int(INVITES_CHANNEL_ID) if INVITES_CHANNEL_ID else None
+    url_channel_id = int(URL_CHANNEL_ID) if URL_CHANNEL_ID else None
+    user_id_channel_id = int(USER_ID_CHANNEL_ID) if USER_ID_CHANNEL_ID else None
+
+    if message.channel.id == invites_channel_id:
         await process_invites(message)
-    elif message.channel.id == int(URL_CHANNEL_ID):
+    elif message.channel.id == url_channel_id:
         await process_urls(message)
-    elif message.channel.id == int(USER_ID_CHANNEL_ID):
+    elif message.channel.id == user_id_channel_id:
         await process_user_ids(message)
 
 
