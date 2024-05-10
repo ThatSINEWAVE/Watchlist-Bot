@@ -434,7 +434,11 @@ def format_url_info(url, url_info, author_mention):
     message += f"**Registrar**: {whois_info.get('registrar', 'None')}\n"
     message += f"**Creation Date**: {whois_info.get('creation_date', 'None')}\n"
     message += f"**Expiration Date**: {whois_info.get('expiration_date', 'None')}\n"
-    message += f"**Name Servers**: {', '.join(whois_info.get('name_servers', ['None']))}\n"
+    name_servers = whois_info.get('name_servers', ['None'])
+    if isinstance(name_servers, list):
+        message += f"**Name Servers**: {', '.join(name_servers)}\n"
+    else:
+        message += f"**Name Servers**: {name_servers}\n"
     message += f"**Status**: {whois_info.get('status', 'None')}\n"
     message += f"**ISP**: {ip_info.get('isp', 'None')}\n"
     message += f"**Organization**: {ip_info.get('org', 'None')}\n"
