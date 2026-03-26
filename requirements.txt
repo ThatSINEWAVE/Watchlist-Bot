@@ -1,5 +1,5 @@
 discord==2.3.2
 python-whois==0.7.3
-requests==2.32.4
+requests==2.33.0
 python-dotenv==1.0.1
 urllib3==2.6.3
